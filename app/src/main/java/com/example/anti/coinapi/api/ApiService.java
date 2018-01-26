@@ -1,6 +1,7 @@
 package com.example.anti.coinapi.api;
 
 import com.example.anti.coinapi.Models.Coins;
+import com.example.anti.coinapi.Models.Settings;
 
 
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ public interface ApiService {
 
     @GET("ticker/{id}")
     Call<ArrayList<Coins>> getBtc(@Path ("id") String id);
+
+    @GET("ticker")
+    Call<Settings> getLimit(@Query ("convert") String convert, @Query("limit") int limit);
+
 
 
 //    @GET(ApiConstants.PHOTOS_ENDPOINT+"search?"+ApiConstants.ConsumerKey)

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.anti.coinapi.BuildConfig;
 import com.example.anti.coinapi.Models.Coins;
+import com.example.anti.coinapi.Models.Settings;
 import com.example.anti.coinapi.others.LoggingInterceptor;
 
 import java.util.ArrayList;
@@ -54,6 +55,13 @@ public class RestApi {
     {
         return request().getCoins();
     }
+
+
+    public Call<Settings> getLimit (String convert, int limit)  {
+
+        return  request().getLimit(convert,limit);
+    }
+
 //
 //    public Call<PhotosModel> getPhotosSearch(String keyword)
 //    {

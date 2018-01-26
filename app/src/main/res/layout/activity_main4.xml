@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.anti.coinapi.activitys.Main4Activity">
+
+    <TextView
+        android:id="@+id/tekst"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:hint="Choose Curenccy" />
+
+    <RadioGroup
+        android:id="@+id/grupa"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/tekst">
+
+
+        <RadioButton
+            android:id="@+id/dolari"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="USD" />
+
+        <RadioButton
+            android:id="@+id/evra"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="EUR"
+            android:nextFocusRight="@id/dolari" />
+
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/tekst2"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="250dp"
+        android:hint="Choose limit" />
+
+    <SeekBar
+        android:id="@+id/seek"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:max="100"
+        android:progress="0"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="250dp"
+        android:layout_toRightOf="@id/tekst2" />
+
+
+    <Button
+        android:id="@+id/kopce"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/seek"
+        android:layout_centerHorizontal="true"
+        android:text="Save" />
+
+
+</RelativeLayout>

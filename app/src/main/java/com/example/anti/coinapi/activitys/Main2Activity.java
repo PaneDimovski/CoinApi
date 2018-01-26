@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.anti.coinapi.Models.Coins;
 import com.example.anti.coinapi.Models.Favorites;
+import com.example.anti.coinapi.Models.Settings;
 import com.example.anti.coinapi.R;
 import com.example.anti.coinapi.adapter.RVadapter;
 import com.example.anti.coinapi.api.RestApi;
@@ -45,6 +46,8 @@ public class Main2Activity extends AppCompatActivity {
     public Favorites favo;
     RestApi api;
 
+    Settings settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class Main2Activity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+
+
         favo = PrefererencesManager.getFavorites(this);
 
         api = new RestApi(Main2Activity.this);
@@ -60,6 +65,48 @@ public class Main2Activity extends AppCompatActivity {
         recycle.setHasFixedSize(true);
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.setAdapter(adapter);
+
+        settings = PrefererencesManager.getSettings(this);
+        if (settings == null )  {
+
+            settings = new Settings();}
+            else  {
+
+            Call<Settings> call2 = api.getLimit(settings.convert, settings.limit);
+
+            call2.enqueue(new Callback<Settings>() {
+                @Override
+                public void onResponse(Call<Settings> call, Response<Settings> response) {
+
+                    if (response.code() == 200) {
+
+                        settings = response.body();
+                        adapter = new RVadapter(Main2Activity.this, coins, new OnRowClick() {
+                            @Override
+                            public void OnRowClick(Coins coins, int position) {
+                                Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+                                intent.putExtra("details", favo.favorites.get(position).getId());
+                                //intent.putExtra("pozicija", position);
+                                startActivity(intent);
+                            }
+                        });
+                        recycle.setAdapter(adapter);
+
+
+                    } else if (response.code() == 401) {
+                        Toast.makeText(Main2Activity.this, "Greska", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Settings> call, Throwable t) {
+
+                }
+            });
+
+
+        }
+
 
 
 //        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(Main2Activity.this, 2);
@@ -96,6 +143,8 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
+
+
 
 
     }
